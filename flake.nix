@@ -8,15 +8,18 @@
   outputs = { self, nixpkgs }:
     let
       system = "x86_64-linux";
-      version = "1.12.1b";
+      
+      # Use a fixed version for now - this will be updated when you run `nix flake update`
+      version = "1.17.9b";
+      
       downloadUrl = {
         "specific" = {
-	  url = "https://github.com/zen-browser/desktop/releases/download/${version}/zen.linux-specific.tar.bz2";
-	  sha256 = "sha256:0jkzdrsd1qdw3pwdafnl5xb061vryxzgwmvp1a6ghdwgl2dm2fcz";
+	  url = "https://github.com/zen-browser/desktop/releases/download/${version}/zen.linux-x86_64.tar.xz";
+	  sha256 = "sha256-6VHGssZzMBKEMkI03B+YdM9mGYh0e40a9nQaoZdT9XM=";
 	};
 	"generic" = {
-	  url = "https://github.com/zen-browser/desktop/releases/download/${version}/zen.linux-generic.tar.bz2";
-	  sha256 = "sha256:17c1ayxjdn8c28c5xvj3f94zjyiiwn8fihm3nq440b9dhkg01qcz";
+	  url = "https://github.com/zen-browser/desktop/releases/download/${version}/zen.linux-x86_64.tar.xz";
+	  sha256 = "sha256-6VHGssZzMBKEMkI03B+YdM9mGYh0e40a9nQaoZdT9XM=";
 	};
       };
 
@@ -52,7 +55,7 @@
 
 		phases = [ "installPhase" "fixupPhase" ];
 
-		nativeBuildInputs = [ pkgs.makeWrapper pkgs.copyDesktopItems pkgs.wrapGAppsHook ] ;
+		nativeBuildInputs = [ pkgs.makeWrapper pkgs.copyDesktopItems pkgs.wrapGAppsHook3 ] ;
 
 		installPhase = ''
 		  mkdir -p $out/bin && cp -r $src/* $out/bin
